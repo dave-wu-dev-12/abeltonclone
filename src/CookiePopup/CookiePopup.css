@@ -1,0 +1,37 @@
+.popupContainer {
+  background-color: black;
+  color: white;
+  padding: 1em;
+  width: 33%;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+}
+
+.popupTermsText {
+  font-size: 12px;
+}
+
+.popupAcceptButton {
+  background-color: blue;
+  width: 100%;
+  border: none;
+  color: white;
+  font-weight: bolder;
+  padding: 1em;
+}
+
+.popupAdditionalInfoContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+}
+
+.popupAdditionalInfoButton {
+  background-color: transparent;
+  border: 2px solid white;
+  width: 48%;
+  font-weight: bolder;
+  color: white;
+  padding: 1em;
+}
