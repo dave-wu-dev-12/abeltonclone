@@ -1,0 +1,68 @@
+.headerContainer,
+.rightHeader,
+.leftHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mainHeader {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0.5em;
+  background-color: white;
+}
+
+.additionalOptions {
+  background-color: white;
+}
+
+.rightHeader {
+  width: 60%;
+  font-size: 12px;
+}
+
+.leftHeader {
+  font-size: 10px;
+  width: 30%;
+  justify-content: space-around;
+}
+
+.logoImage {
+  object-fit: cover;
+  object-position: 20% 0%;
+  width: 50px;
+  height: 40px;
+}
+
+.rightHeaderItem {
+  font-weight: bolder;
+}
+
+.rightHeaderItem:hover,
+.leftHeaderItem:hover {
+  cursor: pointer;
+}
+
+.additionalFromWebsite,
+.additionalFromAbelton {
+  margin: 1em 0;
+}
+
+.innerAdditionalFromWebsite {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.innerAdditionalFromWebsite p {
+  margin-right: 1em;
+}
+
+.innerAdditionalBlocks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.additionalBlock {
+  width: 30%;
+}

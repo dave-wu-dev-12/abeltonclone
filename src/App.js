@@ -2,6 +2,7 @@ import "./App.css";
 import CookiePopup from "./CookiePopup/CookiePopup";
 import Cookies from "universal-cookie";
 import { useEffect, useState } from "react";
+import Header from "./Header/Header";
 
 function App() {
   const [isCookiePopupOpen, setIsCookiePopupOpen] = useState(false);
@@ -29,6 +30,7 @@ function App() {
           handleCookiePopupAccept={handleCookiePopupAccept}
         ></CookiePopup>
       )}
+      <Header></Header>
     </div>
   );
 }
