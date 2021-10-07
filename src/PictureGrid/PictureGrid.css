@@ -1,0 +1,22 @@
+.pictureGridContainer {
+  display: flex;
+  justify-content: start;
+}
+.mainPicture {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.sidePictureOne {
+  position: absolute;
+  bottom: 0;
+  right: -125%;
+}
+
+.sidePictureTwo {
+  position: absolute;
+  top: 0;
+  left: 150%;
+}
