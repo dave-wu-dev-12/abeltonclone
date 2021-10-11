@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Header from "./Header/Header";
 import PictureGrid from "./PictureGrid/PictureGrid";
 import Posts from "./Posts/Posts";
+import EmailSignUp from "./EmailSignUp/EmailSignUp";
 
 function App() {
   const axios = require("axios");
@@ -66,6 +67,7 @@ function App() {
         <Header></Header>
         <PictureGrid></PictureGrid>
         <Posts posts={posts} onPostSelect={bookmarkPost}></Posts>
+        <EmailSignUp></EmailSignUp>
       </div>
     </div>
   );
