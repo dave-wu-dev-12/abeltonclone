@@ -26,6 +26,7 @@ function App() {
   let handleCookiePopupAccept = () => {
     cookies.set("registered", "true", {
       path: "/",
+      expires: new Date("December 17, 2995 03:24:00"),
     });
     setIsCookiePopupOpen(false);
   };
@@ -40,6 +41,8 @@ function App() {
 
   let bookmarkPost = (post) => {
     // remove post from list
+    // copy first and then manipulate
+
     let updatedPosts = posts.filter((x) => {
       if (x.id == post.id && x.userId == post.userId) return false;
       else return true;
