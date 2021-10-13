@@ -32,7 +32,9 @@ function EmailSignUp() {
           onChange={(e) => setNewsLetterInput(e.target.value)}
           onBlur={validateEmail}
         />
-        <button className="signUpButton">I want to sign up!</button>
+        <button disabled={inputError} className="signUpButton">
+          I want to sign up!
+        </button>
       </div>
       <p>We are going to send you updates bi-weekly</p>
     </div>

@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Post.css";
 
 function Posts({ posts, onPostSelect }) {
-  let postList = posts.map((post) => (
+  const [postsToShowIndex, setPostsToShowIndex] = useState(6);
+  console.log(postsToShowIndex);
+
+  let postsToShow = [];
+  postsToShow = posts.slice(0, postsToShowIndex);
+
+  let postList = postsToShow.map((post) => (
     <div className="postContainer">
       <img src="//unsplash.it/150/100" alt="" />
       <p>
@@ -14,7 +20,16 @@ function Posts({ posts, onPostSelect }) {
     </div>
   ));
 
-  return <div className="postsContainer">{postList}</div>;
+  return (
+    <div>
+      <div className="postsContainer">{postList}</div>
+      <div className="showMoreLink">
+        <h2 onClick={() => setPostsToShowIndex(postsToShowIndex + 6)}>
+          Show more items
+        </h2>
+      </div>
+    </div>
+  );
 }
 
 export default Posts;
