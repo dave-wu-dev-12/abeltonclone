@@ -6,13 +6,16 @@ import Header from "./Header/Header";
 import PictureGrid from "./PictureGrid/PictureGrid";
 import Posts from "./Posts/Posts";
 import EmailSignUp from "./EmailSignUp/EmailSignUp";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function App() {
   const axios = require("axios");
 
   const [isCookiePopupOpen, setIsCookiePopupOpen] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [bookmarkedPosts, setBookmarkedPosts] = useState([]);
+  const bookmarkedPosts = useSelector((state) => state.bookMarkedItems);
+  const dispatch = useDispatch();
 
   let cookies = new Cookies();
 
@@ -52,8 +55,7 @@ function App() {
     // add to bookmark
     let bookmarkCopy = bookmarkedPosts.map((x) => x);
     bookmarkCopy.push(post);
-    setBookmarkedPosts(bookmarkCopy);
-    console.log(bookmarkCopy);
+    dispatch({ type: "add_item_to_bookmarks", newBookMarkItems: bookmarkCopy });
   };
 
   return (

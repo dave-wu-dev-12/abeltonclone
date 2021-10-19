@@ -1,8 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function Header() {
   const [isHeaderMoreOpen, setIsHeaderMoreOpen] = useState(false);
+  const bookmarkedPosts = useSelector((state) => state.bookMarkedItems);
+  let bookMarkCounter = (
+    <div className="bookmarkCount">
+      {"Bookmarked " + bookmarkedPosts.length}
+    </div>
+  );
+
+  useEffect(() => {}, [bookmarkedPosts]);
 
   return (
     <div className="mainHeader">
@@ -29,6 +39,7 @@ function Header() {
         <div className="leftHeader">
           <p className="leftHeaderItem">Try Live for free</p>
           <p className="leftHeaderItem">Log in or register</p>
+          {bookMarkCounter}
         </div>
       </div>
 
