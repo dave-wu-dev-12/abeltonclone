@@ -8,7 +8,8 @@ import Posts from "./Posts/Posts";
 import EmailSignUp from "./EmailSignUp/EmailSignUp";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import BookMarks from "./Bookmarks/BookMarks";
 function App() {
   const axios = require("axios");
 
@@ -66,10 +67,19 @@ function App() {
         ></CookiePopup>
       )}
       <div className="mainBodyContent">
-        <Header></Header>
-        <PictureGrid></PictureGrid>
-        <Posts posts={posts} onPostSelect={bookmarkPost}></Posts>
-        <EmailSignUp></EmailSignUp>
+        <Router>
+          <Header></Header>
+          <Switch>
+            <Route path="/bookmarks">
+              <BookMarks></BookMarks>
+            </Route>
+            <Route path="/">
+              <PictureGrid></PictureGrid>
+              <Posts posts={posts} onPostSelect={bookmarkPost}></Posts>
+            </Route>
+          </Switch>
+          <EmailSignUp></EmailSignUp>
+        </Router>
       </div>
     </div>
   );

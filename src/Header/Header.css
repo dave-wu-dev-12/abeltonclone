@@ -80,3 +80,8 @@
 .additionalBlock {
   width: 30%;
 }
+
+.navLink {
+  text-decoration: none;
+  color: black;
+}
