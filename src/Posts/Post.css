@@ -6,8 +6,10 @@
 }
 
 .postContainer {
-  width: 33%;
+  width: 25%;
   margin-bottom: 1em;
+  padding: 3em;
+  box-sizing: border-box;
 }
 
 .showMoreLink {
@@ -32,4 +34,27 @@
 
 .showMoreLink:hover::after {
   transform: scaleX(1);
+}
+
+.customziedpicture {
+  position: relative;
+}
+
+.customziedpicture img {
+  width: 100%;
+  display: block;
+}
+
+.playIconContainer {
+  position: absolute;
+  background-color: blue;
+  bottom: 0;
+  left: 0;
+}
+
+.newTagContainer {
+  background-color: chartreuse;
+  position: absolute;
+  top: 0;
+  right: 0;
 }

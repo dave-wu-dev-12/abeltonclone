@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Post.css";
+import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 
 function Posts({ posts, onPostSelect }) {
   const [postsToShowIndex, setPostsToShowIndex] = useState(6);
@@ -10,7 +11,13 @@ function Posts({ posts, onPostSelect }) {
 
   let postList = postsToShow.map((post) => (
     <div className="postContainer">
-      <img src="//unsplash.it/150/100" alt="" />
+      <div className="customziedpicture">
+        <img src="//unsplash.it/150/100" alt="" />
+        <div className="newTagContainer">New</div>
+        <div className="playIconContainer">
+          <PlayArrowIcon></PlayArrowIcon>
+        </div>
+      </div>
       <p>
         {post.userId} : {post.id}
       </p>
