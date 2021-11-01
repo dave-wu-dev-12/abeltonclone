@@ -14,8 +14,9 @@ function App() {
   const axios = require("axios");
 
   const [isCookiePopupOpen, setIsCookiePopupOpen] = useState(false);
-  const [posts, setPosts] = useState([]);
   const bookmarkedPosts = useSelector((state) => state.bookMarkedItems);
+  const posts = useSelector((state) => state.availablePosts);
+
   const dispatch = useDispatch();
 
   let cookies = new Cookies();
@@ -40,7 +41,10 @@ function App() {
     axios
       .get("https://jsonplaceholder.typicode.com/posts")
       .then(function (response) {
-        setPosts(response.data);
+        dispatch({
+          type: "set_posts",
+          availablePosts: response.data,
+        });
       });
   }, []);
 
@@ -52,7 +56,10 @@ function App() {
       if (x.id == post.id && x.userId == post.userId) return false;
       else return true;
     });
-    setPosts(updatedPosts);
+    dispatch({
+      type: "set_posts",
+      availablePosts: updatedPosts,
+    });
     // add to bookmark
     let bookmarkCopy = bookmarkedPosts.map((x) => x);
     bookmarkCopy.push(post);
