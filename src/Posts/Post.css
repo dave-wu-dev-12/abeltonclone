@@ -10,6 +10,9 @@
   margin-bottom: 1em;
   padding: 3em;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 550px;
 }
 
 .showMoreLink {
@@ -57,4 +60,11 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.postTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
 }

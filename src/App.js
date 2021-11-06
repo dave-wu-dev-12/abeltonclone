@@ -41,9 +41,14 @@ function App() {
     axios
       .get("https://jsonplaceholder.typicode.com/posts")
       .then(function (response) {
+        let updatedResponseData = response.data.map((item) => {
+          item.viewMore = false;
+          item.price = Math.floor(Math.random() * 10).toString() + ".99";
+          return item;
+        });
         dispatch({
           type: "set_posts",
-          availablePosts: response.data,
+          availablePosts: updatedResponseData,
         });
       });
   }, []);

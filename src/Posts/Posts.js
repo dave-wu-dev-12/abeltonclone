@@ -18,23 +18,29 @@ function Posts({ posts, onPostSelect }) {
           <PlayArrowIcon></PlayArrowIcon>
         </div>
       </div>
-      <p>
-        {post.userId} : {post.id}
-      </p>
-      <h5>{post.title}</h5>
-      <p>{post.body}</p>
-      <button onClick={() => onPostSelect(post)}>Select</button>
+      <div className="postTextContainer">
+        <div>
+          <p>
+            {post.userId} : {post.id}
+          </p>
+          <h5>{post.title}</h5>
+          <p>{post.body}</p>
+        </div>
+        <button onClick={() => onPostSelect(post)}>Select</button>
+      </div>
     </div>
   ));
 
   return (
     <div>
       <div className="postsContainer">{postList}</div>
-      <div className="showMoreLink">
-        <h2 onClick={() => setPostsToShowIndex(postsToShowIndex + 6)}>
-          Show more items
-        </h2>
-      </div>
+      {posts.length > 0 && (
+        <div className="showMoreLink">
+          <h2 onClick={() => setPostsToShowIndex(postsToShowIndex + 6)}>
+            Show more items
+          </h2>
+        </div>
+      )}
     </div>
   );
 }
