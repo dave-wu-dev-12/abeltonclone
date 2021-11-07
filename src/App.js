@@ -44,6 +44,9 @@ function App() {
         let updatedResponseData = response.data.map((item) => {
           item.viewMore = false;
           item.price = Math.floor(Math.random() * 10).toString() + ".99";
+          item.extraInfo = {
+            additionalText: "Biggums",
+          };
           return item;
         });
         dispatch({
@@ -66,7 +69,7 @@ function App() {
       availablePosts: updatedPosts,
     });
     // add to bookmark
-    let bookmarkCopy = bookmarkedPosts.map((x) => x);
+    let bookmarkCopy = [...bookmarkedPosts];
     bookmarkCopy.push(post);
     dispatch({ type: "add_item_to_bookmarks", newBookMarkItems: bookmarkCopy });
   };

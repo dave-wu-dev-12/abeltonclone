@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import "./Bookmarks.css";
 import { useDispatch } from "react-redux";
+import cloneDeep from "lodash/cloneDeep";
 
 function BookMarks() {
   const bookmarkedPosts = useSelector((state) => state.bookMarkedItems);
@@ -13,19 +14,30 @@ function BookMarks() {
 
   useEffect(() => {
     // reset all posts viewmore content
+    // replace additional text
     let updatedBookmarks = bookmarkedPosts.map((book) => {
-      book.viewMore = false;
-      return book;
+      // always edit a copy of the object and never the obj itself in react
+      return {
+        ...book,
+        viewMore: false,
+        extraInfo: { ...book.extraInfo, additionalText: "ty" },
+      };
     });
 
     dispatch({
       type: "update_item_from_bookmarks",
       newBookMarkItems: updatedBookmarks,
     });
-
-    // get current total price
-    getCurrentBookmarkTotal();
   }, []);
+
+  useEffect(() => {
+    // here test is a whole new instance
+    // changes to it will not trigger useEffects
+    let test = cloneDeep(bookmarkedPosts);
+    test = [];
+
+    getCurrentBookmarkTotal();
+  }, [bookmarkedPosts]);
 
   const getCurrentBookmarkTotal = () => {
     let newTotalPrice = 0;
@@ -36,7 +48,7 @@ function BookMarks() {
 
     dispatch({
       type: "update_bookmark_total",
-      newPrice: newTotalPrice,
+      newPrice: newTotalPrice.toFixed(2),
     });
   };
 
@@ -90,7 +102,7 @@ function BookMarks() {
         bookmarkToShowMore.userId == book.userId &&
         bookmarkToShowMore.id == book.id
       ) {
-        book.viewMore = !book.viewMore;
+        return { ...book, viewMore: !book.viewMore };
       }
       return book;
     });
@@ -134,6 +146,7 @@ function BookMarks() {
         <div>
           <h5>{"$" + book.price}</h5>
           <p>
+            {book.extraInfo.additionalText}
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam,
             deserunt ratione earum odio tenetur magni iure, ut, illo natus ad
             possimus? Ipsum ex cumque recusandae distinctio perspiciatis ab
