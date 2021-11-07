@@ -85,7 +85,7 @@ function BookMarks() {
       } else if (ob1.id > ob2.id) {
         return 1;
       } else {
-        // nothing to split them
+        // nothing to split thems
         return 0;
       }
     });
