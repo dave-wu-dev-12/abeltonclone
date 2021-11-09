@@ -8,6 +8,10 @@
 
 .mainHeader {
   padding: 0.5em;
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 99;
 }
 
 .additionalOptions {
@@ -84,4 +88,23 @@
 .navLink {
   text-decoration: none;
   color: black;
+}
+
+.bookmarkCount {
+  position: relative;
+}
+
+.miniCartContainer {
+  position: absolute;
+  bottom: -420px;
+  left: -220px;
+  border: 1px solid black;
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  z-index: 99;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }

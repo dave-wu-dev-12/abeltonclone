@@ -6,14 +6,93 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 
 function Header() {
   const [isHeaderMoreOpen, setIsHeaderMoreOpen] = useState(false);
+  const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
+  const posts = useSelector((state) => state.availablePosts);
+  const dispatch = useDispatch();
   const bookmarkedPosts = useSelector((state) => state.bookMarkedItems);
+
+  let bookmarkContent = bookmarkedPosts.map((book) => (
+    <>
+      <div className="bookmarkContainer">
+        <img
+          className="bookmarkPageImage"
+          src={"//unsplash.it/1" + book.id + "0/100"}
+          alt=""
+        />
+        <div className="bookmarkPageItemDescription">
+          <p>
+            {book.userId} : {book.id}
+          </p>
+          <h5>{book.title}</h5>
+          <p>{book.body}</p>
+        </div>
+
+        <button
+          className="bookmarkPageItemRemoveButton"
+          onClick={() => removeBookMark(book)}
+        >
+          Remove
+        </button>
+      </div>
+    </>
+  ));
+
   let bookMarkCounter = (
-    <div className="bookmarkCount">
+    <div className="bookmarkCount" onClick={() => showMiniCart()}>
       {"Bookmarked " + bookmarkedPosts.length}
+      {isMiniCartOpen && (
+        <div className="miniCartContainer">{bookmarkContent}</div>
+      )}
     </div>
   );
 
-  useEffect(() => {}, [bookmarkedPosts]);
+  const showMiniCart = () => {
+    setIsMiniCartOpen(!isMiniCartOpen);
+  };
+
+  const removeBookMark = (bookToRemove) => {
+    let updatedBookmarks = bookmarkedPosts.filter((bookMarked) => {
+      if (
+        bookMarked.userId != bookToRemove.userId ||
+        (bookMarked.userId == bookToRemove.userId &&
+          bookMarked.id != bookToRemove.id)
+      ) {
+        return true;
+      }
+    });
+
+    dispatch({
+      type: "remove_item_from_bookmarks",
+      newBookMarkItems: updatedBookmarks,
+    });
+
+    // add back to availableposts
+    let updatedAvailablePosts = [...posts, bookToRemove];
+
+    // sort by userId and id
+    updatedAvailablePosts.sort(function (ob1, ob2) {
+      if (ob1.userId > ob2.userId) {
+        return 1;
+      } else if (ob1.userId < ob2.userId) {
+        return -1;
+      }
+
+      // Else go to the 2nd item
+      if (ob1.id < ob2.id) {
+        return -1;
+      } else if (ob1.id > ob2.id) {
+        return 1;
+      } else {
+        // nothing to split thems
+        return 0;
+      }
+    });
+
+    dispatch({
+      type: "set_posts",
+      availablePosts: updatedAvailablePosts,
+    });
+  };
 
   return (
     <div className="mainHeader">

@@ -46,6 +46,7 @@ function App() {
           item.price = Math.floor(Math.random() * 10).toString() + ".99";
           item.extraInfo = {
             additionalText: "Biggums",
+            subText: "Great",
           };
           return item;
         });

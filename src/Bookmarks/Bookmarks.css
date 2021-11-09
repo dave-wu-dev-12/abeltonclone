@@ -37,3 +37,24 @@
 .bookmarkPageItemRemoveButton {
   width: 100%;
 }
+
+.checkoutContainer {
+  display: flex;
+  width: 50%;
+  justify-content: space-between;
+}
+
+.checkoutButton {
+  flex: 1;
+  margin-left: 1em;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.5em;
+  font-weight: bolder;
+}
+
+.checkoutButton:hover {
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  background-color: red;
+  cursor: pointer;
+}

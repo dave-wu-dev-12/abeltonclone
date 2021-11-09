@@ -147,6 +147,7 @@ function BookMarks() {
           <h5>{"$" + book.price}</h5>
           <p>
             {book.extraInfo.additionalText}
+            {book.extraInfo.subText}
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam,
             deserunt ratione earum odio tenetur magni iure, ut, illo natus ad
             possimus? Ipsum ex cumque recusandae distinctio perspiciatis ab
@@ -162,7 +163,10 @@ function BookMarks() {
   return (
     <div className="bookMarkListContainer">
       <h1>Bookmarks</h1>
-      <h1>Total Price: ${currentBookMarkTotalPrice}</h1>
+      <div className="checkoutContainer">
+        <h1>Total Price: ${currentBookMarkTotalPrice}</h1>
+        <button className="checkoutButton">CHECKOUT</button>
+      </div>
       {bookmarkContent}
     </div>
   );
