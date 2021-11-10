@@ -165,7 +165,16 @@ function BookMarks() {
       <h1>Bookmarks</h1>
       <div className="checkoutContainer">
         <h1>Total Price: ${currentBookMarkTotalPrice}</h1>
-        <button className="checkoutButton">CHECKOUT</button>
+        {
+          <button
+            className={
+              "checkoutButton " +
+              (bookmarkedPosts.length == 0 ? "disabledButton" : "")
+            }
+          >
+            CHECKOUT
+          </button>
+        }
       </div>
       {bookmarkContent}
     </div>

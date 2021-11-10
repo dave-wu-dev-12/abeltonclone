@@ -41,7 +41,15 @@ function Header() {
     <div className="bookmarkCount" onClick={() => showMiniCart()}>
       {"Bookmarked " + bookmarkedPosts.length}
       {isMiniCartOpen && (
-        <div className="miniCartContainer">{bookmarkContent}</div>
+        <div className="miniCartContainer">
+          {bookmarkedPosts.length == 0 ? (
+            <div className="noItemBookMarkContainer">
+              <h2>No items bookmarked</h2>
+            </div>
+          ) : (
+            bookmarkContent
+          )}
+        </div>
       )}
     </div>
   );

@@ -58,3 +58,8 @@
   background-color: red;
   cursor: pointer;
 }
+
+.disabledButton:hover {
+  cursor: not-allowed;
+  background-color: transparent;
+}
