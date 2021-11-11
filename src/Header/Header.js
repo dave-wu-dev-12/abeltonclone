@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Header.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -10,6 +10,26 @@ function Header() {
   const posts = useSelector((state) => state.availablePosts);
   const dispatch = useDispatch();
   const bookmarkedPosts = useSelector((state) => state.bookMarkedItems);
+  const miniCartContainerRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (
+      miniCartContainerRef.current &&
+      !miniCartContainerRef.current.contains(event.target)
+    ) {
+      console.log("outside");
+      setIsMiniCartOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMiniCartOpen]);
 
   let bookmarkContent = bookmarkedPosts.map((book) => (
     <>
@@ -38,8 +58,10 @@ function Header() {
   ));
 
   let bookMarkCounter = (
-    <div className="bookmarkCount" onClick={() => showMiniCart()}>
-      {"Bookmarked " + bookmarkedPosts.length}
+    <div className="bookmarkCount" ref={miniCartContainerRef}>
+      <div onClick={() => setIsMiniCartOpen(!isMiniCartOpen)}>
+        {"Bookmarked " + bookmarkedPosts.length}
+      </div>
       {isMiniCartOpen && (
         <div className="miniCartContainer">
           {bookmarkedPosts.length == 0 ? (
@@ -53,10 +75,6 @@ function Header() {
       )}
     </div>
   );
-
-  const showMiniCart = () => {
-    setIsMiniCartOpen(!isMiniCartOpen);
-  };
 
   const removeBookMark = (bookToRemove) => {
     let updatedBookmarks = bookmarkedPosts.filter((bookMarked) => {
