@@ -16,6 +16,7 @@ function App() {
   const [isCookiePopupOpen, setIsCookiePopupOpen] = useState(false);
   const bookmarkedPosts = useSelector((state) => state.bookMarkedItems);
   const posts = useSelector((state) => state.availablePosts);
+  const [showBottomMiniCart, setShowBottomMiniCart] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -57,6 +58,14 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    if (bookmarkedPosts.length > 0) {
+      setShowBottomMiniCart(true);
+    } else {
+      setShowBottomMiniCart(false);
+    }
+  }, [bookmarkedPosts]);
+
   let bookmarkPost = (post) => {
     // remove post from list
     // copy first and then manipulate
@@ -70,8 +79,7 @@ function App() {
       availablePosts: updatedPosts,
     });
     // add to bookmark
-    let bookmarkCopy = [...bookmarkedPosts];
-    bookmarkCopy.push(post);
+    let bookmarkCopy = [...bookmarkedPosts, post];
     dispatch({ type: "add_item_to_bookmarks", newBookMarkItems: bookmarkCopy });
   };
 
@@ -90,8 +98,26 @@ function App() {
               <BookMarks></BookMarks>
             </Route>
             <Route path="/">
-              <PictureGrid></PictureGrid>
-              <Posts posts={posts} onPostSelect={bookmarkPost}></Posts>
+              <div className="homePageContainer">
+                <PictureGrid></PictureGrid>
+                <Posts posts={posts} onPostSelect={bookmarkPost}></Posts>
+                {showBottomMiniCart && (
+                  <div className="bottomCartContainer">
+                    <div className="bottomCartHeaderText">
+                      <p>Welcome Back, you have</p>
+                      <p className="bottomCartCount">
+                        {" " + bookmarkedPosts.length + " "}
+                      </p>
+                      <p>items in your cart</p>
+                      <p className="bottomCartDismiss">Dismiss</p>
+                    </div>
+
+                    <Link className="navLink bottomcartLink" to="/bookmarks">
+                      <p>Click here to view bookmarks</p>
+                    </Link>
+                  </div>
+                )}
+              </div>
             </Route>
           </Switch>
           <EmailSignUp></EmailSignUp>
